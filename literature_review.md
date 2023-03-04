@@ -20,13 +20,6 @@ Then each question was searched on Wikipedia using Google, and the top-ranked ar
 In Mr. TyDi they start with the same raw Wikipedia dumps as Mr. TyDi, and collect all passages in each language and merge them with the passages in TyDi QA.
 Any questions with no answer are discarded, and the relevant passages in Mr. TyDi are the relevant passages in TyDi QA.
 
-There could be some dataset artifacts as a result of the way the dataset was created.
-Assuming that the labelled passages are the only relevant passages could mean there are false negatives (relevant passages with marked as irrelevant).
-Since the TyDi QA test set isn't public, they use the TyDi QA development set instead, and create a new development set by sampling 20% of the questions from the training set and removing any questions duplicated in the training set.
-As the TyDi QA development set was separately verified by annotators, this may mean the Mr. TyDi development set has more incorrect labels or lower quality questions than the test set.
-Because the passage segmentation for Mr TyDi wasn't well documented in the original, they use WikiExtractor to split on two consecutive newlines, which looks qualitatively similar.
-This means there could be some systematic difference between positive and negative passages due to the differences in passage segmentation.
-
 They set simple baselines using BM25, mDPR, and a hybrid between the two.
 The metrics they use are Reciprocal Rank@100, to measure the effectiveness of the ranking, and Recall@100 to put an upper bound on the effectiveness of a system that uses this as a retriever.
 For BM25 they considered both default parameters, and tuning the parameters on the development set, which had very similar results across all languages except Telugu, where it made a large improvement.
