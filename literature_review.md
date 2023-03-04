@@ -112,35 +112,35 @@ The table below summarises the Recall@100 for the retrieval models from the diff
 This metric is a chosen as a strong indicator of the retrieval quality; MRR@100 could be improved by adding a cross-encoder to re-rank the results.
 Note the difference in Recall@100 in mDPR on Natural Questions between Zhang et al., 2021 and Zhang et al., 2022; this difference could be due to a difference in model training and hyperparameter selection, which shows we need to be careful when comparing results across papers.
 
-| Paper                  | Model          | Train             | Ar    | Bn    | En    | Fi    | Id    | Ja    | Ko    | Ru    | Sw    | Te    | Th    | Avg   | Avg Excluding Thai |
-|------------------------|----------------|-------------------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|--------------------|
-| Izacard et al., 2022   | mContriever    | MS MARCO          | 0.887 | 0.914 | 0.772 | 0.881 | 0.898 | 0.817 | 0.782 | 0.838 | 0.914 | 0.966 | 0.905 | 0.870 | 0.867              |
-| Bonifacio, et al. 2022 | mColBERT       | mMARCO            | 0.859 | 0.918 | 0.786 | 0.826 | 0.911 | 0.709 | 0.729 | 0.861 | 0.808 | 0.969 | -     | -     | 0.838              |
-| Wu et al., 2022        | CCP            | Natural Questions | 0.820 | 0.883 | 0.801 | 0.787 | 0.875 | 0.800 | 0.732 | 0.772 | 0.751 | 0.888 | 0.889 | 0.818 | 0.811              |
-| Zhang et al., 2021     | BM25 + mDPR    | Natural Questions | 0.863 | 0.937 | 0.696 | 0.788 | 0.887 | 0.778 | 0.706 | 0.760 | 0.786 | 0.827 | 0.875 | 0.809 | 0.803              |
-| Wu et al., 2022        | InfoXLM        | Natural Questions | 0.806 | 0.860 | 0.804 | 0.749 | 0.869 | 0.788 | 0.717 | 0.767 | 0.724 | 0.867 | 0.874 | 0.802 | 0.795              |
-| Wu et al., 2022        | XLM-R          | Natural Questions | 0.813 | 0.842 | 0.776 | 0.782 | 0.886 | 0.785 | 0.727 | 0.774 | 0.633 | 0.875 | 0.882 | 0.798 | 0.789              |
-| Izacard et al., 2022   | XLM-R          | MS MARCO          | 0.799 | 0.842 | 0.731 | 0.816 | 0.874 | 0.709 | 0.711 | 0.741 | 0.739 | 0.912 | 0.895 | 0.797 | 0.787              |
-| Izacard et al., 2022   | mBERT          | MS MARCO          | 0.811 | 0.887 | 0.778 | 0.742 | 0.810 | 0.761 | 0.667 | 0.776 | 0.741 | 0.895 | 0.578 | 0.768 | 0.787              |
-| Wu et al., 2022        | LABSE          | Natural Questions | 0.762 | 0.910 | 0.783 | 0.760 | 0.852 | 0.669 | 0.644 | 0.744 | 0.750 | 0.889 | 0.834 | 0.782 | 0.776              |
-| Izacard et al., 2022   | mContriever    | -                 | 0.820 | 0.896 | 0.488 | 0.796 | 0.814 | 0.728 | 0.662 | 0.685 | 0.887 | 0.808 | 0.903 | 0.772 | 0.758              |
-| Zhang et al., 2021     | BM25 (tuned)   | -                 | 0.800 | 0.874 | 0.551 | 0.725 | 0.846 | 0.656 | 0.797 | 0.660 | 0.764 | 0.813 | 0.853 | 0.758 | 0.749              |
-| Zhang et al., 2022     | mDPR           | MS MARCO          | 0.799 | 0.820 | 0.758 | 0.693 | 0.758 | 0.738 | 0.645 | 0.728 | 0.686 | 0.797 | 0.648 | 0.734 | 0.742              |
-| Zhang et al., 2021     | BM25 (default) | -                 | 0.793 | 0.869 | 0.537 | 0.719 | 0.843 | 0.645 | 0.619 | 0.648 | 0.764 | 0.758 | 0.853 | 0.732 | 0.720              |
-| Wu et al., 2022        | mBERT          | Natural Questions | 0.695 | 0.712 | 0.749 | 0.645 | 0.739 | 0.662 | 0.565 | 0.674 | 0.537 | 0.433 | 0.529 | 0.631 | 0.641              |
-| Zhang et al., 2022     | mDPR           | Natural Questions | 0.650 | 0.779 | 0.678 | 0.568 | 0.685 | 0.584 | 0.533 | 0.647 | 0.528 | 0.366 | 0.515 | 0.594 | 0.602              |
-| Zhang et al., 2021     | mDPR           | Natural Questions | 0.620 | 0.671 | 0.475 | 0.375 | 0.466 | 0.535 | 0.490 | 0.498 | 0.264 | 0.352 | 0.455 | 0.473 | 0.477              |
+| Paper                  | Model          | Train             | Ar   | Bn   | En   | Fi   | Id   | Ja   | Ko   | Ru   | Sw   | Te   | Th   | Avg  |
+|------------------------|----------------|-------------------|------|------|------|------|------|------|------|------|------|------|------|------|
+| Izacard et al., 2022   | mCon-triever   | MS MARCO          | 88.7 | 91.4 | 77.2 | 88.1 | 89.8 | 81.7 | 78.2 | 83.8 | 91.4 | 96.6 | 90.5 | 87.0 |
+| Bonifacio, et al. 2022 | mCol-BERT      | mMARCO            | 85.9 | 91.8 | 78.6 | 82.6 | 91.1 | 70.9 | 72.9 | 86.1 | 80.8 | 96.9 | -    | -    |
+| Wu et al., 2022        | CCP            | Natural Questions | 82.0 | 88.3 | 80.1 | 78.7 | 87.5 | 80.0 | 73.2 | 77.2 | 75.1 | 88.8 | 88.9 | 81.8 |
+| Zhang et al., 2021     | BM25 + mDPR    | Natural Questions | 86.3 | 93.7 | 69.6 | 78.8 | 88.7 | 77.8 | 70.6 | 76.0 | 78.6 | 82.7 | 87.5 | 80.9 |
+| Wu et al., 2022        | InfoXLM        | Natural Questions | 80.6 | 86.0 | 80.4 | 74.9 | 86.9 | 78.8 | 71.7 | 76.7 | 72.4 | 86.7 | 87.4 | 80.2 |
+| Wu et al., 2022        | XLM-R          | Natural Questions | 81.3 | 84.2 | 77.6 | 78.2 | 88.6 | 78.5 | 72.7 | 77.4 | 63.3 | 87.5 | 88.2 | 79.8 |
+| Izacard et al., 2022   | XLM-R          | MS MARCO          | 79.9 | 84.2 | 73.1 | 81.6 | 87.4 | 70.9 | 71.1 | 74.1 | 73.9 | 91.2 | 89.5 | 79.7 |
+| Izacard et al., 2022   | mBERT          | MS MARCO          | 81.1 | 88.7 | 77.8 | 74.2 | 81.0 | 76.1 | 66.7 | 77.6 | 74.1 | 89.5 | 57.8 | 76.8 |
+| Wu et al., 2022        | LABSE          | Natural Questions | 76.2 | 91.0 | 78.3 | 76.0 | 85.2 | 66.9 | 64.4 | 74.4 | 75.0 | 88.9 | 83.4 | 78.2 |
+| Izacard et al., 2022   | mCon-triever   | -                 | 82.0 | 89.6 | 48.8 | 79.6 | 81.4 | 72.8 | 66.2 | 68.5 | 88.7 | 80.8 | 90.3 | 77.2 |
+| Zhang et al., 2021     | BM25 (tuned)   | -                 | 80.0 | 87.4 | 55.1 | 72.5 | 84.6 | 65.6 | 79.7 | 66.0 | 76.4 | 81.3 | 85.3 | 75.8 |
+| Zhang et al., 2022     | mDPR           | MS MARCO          | 79.9 | 82.0 | 75.8 | 69.3 | 75.8 | 73.8 | 64.5 | 72.8 | 68.6 | 79.7 | 64.8 | 73.4 |
+| Zhang et al., 2021     | BM25 (default) | -                 | 79.3 | 86.9 | 53.7 | 71.9 | 84.3 | 64.5 | 61.9 | 64.8 | 76.4 | 75.8 | 85.3 | 73.2 |
+| Wu et al., 2022        | mBERT          | Natural Questions | 69.5 | 71.2 | 74.9 | 64.5 | 73.9 | 66.2 | 56.5 | 67.4 | 53.7 | 43.3 | 52.9 | 63.1 |
+| Zhang et al., 2022     | mDPR           | Natural Questions | 65.0 | 77.9 | 67.8 | 56.8 | 68.5 | 58.4 | 53.3 | 64.7 | 52.8 | 36.6 | 51.5 | 59.4 |
+| Zhang et al., 2021     | mDPR           | Natural Questions | 62.0 | 67.1 | 47.5 | 37.5 | 46.6 | 53.5 | 49.0 | 49.8 | 26.4 | 35.2 | 45.5 | 47.3 |
 
 Some of the papers also investigate the related tasks of cross-lingual retrieval and fine-tuning on Mr TyDi data.
 Both Wu et al., 2022 and Izacard et al., 2022 show that contrastive sentence level pre-training improves the related task of cross-lingual retrieval; asking a question in one language and returning a result from another language.
 Izacard et al., 2022 and Zhang et al., 2022 show that training on Mr. TyDi data leads to very large improvements, and both note that pre-training with MS MARCO helps boost the performance.
 The Recall@100 from these two papers is listed below.
 
-| Paper                | Model       | Train              | Ar    | Bn    | En    | Fi    | Id    | Ja    | Ko    | Ru    | Sw    | Te    | Th    | Avg   |
-|----------------------|-------------|--------------------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|
-| Izacard et al., 2022 | mContriever | MS MARCO; Mr. TyDi | 0.940 | 0.986 | 0.922 | 0.927 | 0.945 | 0.888 | 0.889 | 0.924 | 0.937 | 0.989 | 0.952 | 0.936 |
-| Zhang et al., 2022   | BM25 + mDPR | MS MARCO; Mr. TyDi | 0.932 | 0.946 | 0.857 | 0.909 | 0.948 | 0.883 | 0.853 | 0.898 | 0.903 | 0.982 | 0.946 | 0.916 |
-| Zhang et al., 2022   | mDPR        | MS MARCO; Mr. TyDi | 0.900 | 0.955 | 0.841 | 0.856 | 0.860 | 0.813 | 0.785 | 0.843 | 0.876 | 0.966 | 0.883 | 0.871 |
+| Paper                | Model       | Train              | Ar   | Bn   | En   | Fi   | Id   | Ja   | Ko   | Ru   | Sw   | Te   | Th   | Avg  |
+|----------------------|-------------|--------------------|------|------|------|------|------|------|------|------|------|------|------|------|
+| Izacard et al., 2022 | mCon-triever | MS MARCO; Mr. TyDi | 94.0 | 98.6 | 92.2 | 92.7 | 94.5 | 88.8 | 88.9 | 92.4 | 93.7 | 98.9 | 95.2 | 93.6 |
+| Zhang et al., 2022   | BM25 + mDPR | MS MARCO; Mr. TyDi | 93.2 | 94.6 | 85.7 | 90.9 | 94.8 | 88.3 | 85.3 | 89.8 | 90.3 | 98.2 | 94.6 | 91.6 |
+| Zhang et al., 2022   | mDPR        | MS MARCO; Mr. TyDi | 90.0 | 95.5 | 84.1 | 85.6 | 86.0 | 81.3 | 78.5 | 84.3 | 87.6 | 96.6 | 88.3 | 87.1 |
 
 # Future work
 
