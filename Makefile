@@ -1,4 +1,4 @@
-all: literature_review.pdf
+all: docs/literature_review.pdf
 
-literature_review.pdf: literature_review.md
-	pandoc literature_review.md -o literature_review.pdf
+docs/literature_review.pdf: docs/literature_review.md
+	pandoc docs/literature_review.md -o docs/literature_review.pdf
