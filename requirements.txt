@@ -1,0 +1,15 @@
+opustools
+
+datasets
+transformers
+optimum
+sentence_transformers
+
+faiss-cpu
+
+numpy
+pandas
+
+ranx
+
+typer

@@ -1,0 +1,9 @@
+name: aligned_ir
+channels:
+  - defaults
+  - nvidia/label/cuda-11.7.1
+  - conda-forge
+dependencies:
+  - python=3.8
+  - cudatoolkit=11.7
+  - cudnn=8.1.0
