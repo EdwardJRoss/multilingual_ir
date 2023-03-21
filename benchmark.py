@@ -12,7 +12,6 @@ import torch
 import typer
 from datasets import load_dataset
 from transformers import AutoModel, AutoTokenizer, DataCollatorWithPadding
-from optimum.bettertransformer import BetterTransformer
 
 logger = logging.getLogger(__name__)
 
@@ -42,6 +41,7 @@ class Split(str, Enum):
 
 def combine_title_text(example):
     example["title_text"] = example["title"] + "\n\n" + example["text"]
+    example["length"] = len(example["title_text"].split())
     return example
 
 
@@ -83,9 +83,9 @@ def embed_example_batch(input_ids, attention_mask, collate_fn, model):
     batch = {"input_ids": input_ids, "attention_mask": attention_mask}
     batch = collate_fn(batch)
 
-    input_ids = batch["input_ids"].to(model.device)
-    attention_mask = batch["attention_mask"].to(model.device)
-    with torch.no_grad():
+    input_ids = batch["input_ids"].to('cuda')
+    attention_mask = batch["attention_mask"].to('cuda')
+    with torch.inference_mode(), torch.cuda.amp.autocast():
         outputs = model(input_ids, attention_mask=attention_mask)
         sentence_embeddings = mean_pooling(outputs.last_hidden_state, attention_mask)
     return {"embeddings": sentence_embeddings.cpu()}
@@ -98,6 +98,7 @@ def get_device():
 def prepare_corpus(corpus, tokenizer, model, batch_size):
     logger.info("Combining title and text")
     corpus = corpus.map(combine_title_text)
+    corpus = corpus.sort("length", reverse=True)
     logger.info("Tokenizing")
     corpus = corpus.map(Tokenization(tokenizer, "title_text"), batched=True)
 
@@ -108,7 +109,7 @@ def prepare_corpus(corpus, tokenizer, model, batch_size):
         batched=True,
         batch_size=batch_size,
         input_columns=["input_ids", "attention_mask"],
-        keep_in_memory=True,
+        #keep_in_memory=True,
         fn_kwargs={
             "collate_fn": DataCollatorWithPadding(tokenizer=tokenizer),
             "model": model,
@@ -133,7 +134,7 @@ def prepare_queries(queries, tokenizer, model, batch_size):
         batched=True,
         batch_size=batch_size,
         input_columns=["input_ids", "attention_mask"],
-        keep_in_memory=True,
+        #keep_in_memory=True,
         fn_kwargs={
             "collate_fn": DataCollatorWithPadding(tokenizer=tokenizer),
             "model": model,
@@ -142,11 +143,14 @@ def prepare_queries(queries, tokenizer, model, batch_size):
     return queries
 
 
+app=    typer.Typer(pretty_exceptions_enable=False)
+
+@app.command()
 def main(
     model_name_or_path: str,
     language: Language,
     split: Split = Split.dev,
-    batch_size: int = 32,
+    batch_size: int = 256,
     k: int = 100,
     device: str = typer.Argument(get_device, help="Device to use"),
     metrics: List[str] = typer.Option(
@@ -159,8 +163,8 @@ def main(
 
     logger.info(f"Loading {model_name_or_path} using device {device}")
     tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
-    model = AutoModel.from_pretrained(model_name_or_path).to(device)
-    model = BetterTransformer.transform(model)
+    model = AutoModel.from_pretrained(model_name_or_path).eval().to(device)
+
 
     logger.info("Loading corpus")
     corpus = load_dataset(MR_TYDI_CORPUS, language.value, split="train")
@@ -217,4 +221,4 @@ if __name__ == "__main__":
         level=logging.INFO,
         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
     )
-    typer.run(main)
+    app()
