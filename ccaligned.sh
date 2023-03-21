@@ -13,13 +13,13 @@ DEV_SENTENCES=1000
 
 for lang in "${LANGS[@]}"; do
     # Download the data
-    opus_read -d TED2020 -s en -t "$lang" -p raw -wm moses -w "TED2020-en-$lang.tsv" -dl "../$DATA_DIR" -q
+    opus_read -d CCAligned -s en -t "$lang" -p raw -wm moses -w "ccaligned-en-$lang.tsv" -dl "../$DATA_DIR" -q
     # Put first DEV_SENTENCES into dev set file and gzip
-    head -n "$DEV_SENTENCES" "TED2020-en-$lang.tsv" > "TED2020-en-$lang-dev.tsv"
-    gzip "TED2020-en-$lang-dev.tsv"
+    head -n "$DEV_SENTENCES" "ccaligned-en-$lang.tsv" > "ccaligned-en-$lang-dev.tsv"
+    gzip "ccaligned-en-$lang-dev.tsv"
     # Put the rest into train set file and gzip
-    tail -n +$((DEV_SENTENCES + 1)) "TED2020-en-$lang.tsv" > "TED2020-en-$lang-train.tsv"
-    gzip "TED2020-en-$lang-train.tsv"
+    tail -n +$((DEV_SENTENCES + 1)) "ccaligned-en-$lang.tsv" > "ccaligned-en-$lang-train.tsv"
+    gzip "ccaligned-en-$lang-train.tsv"
     # Remove the original file
-    rm "TED2020-en-$lang.tsv"
+    rm "ccaligned-en-$lang.tsv"
 done
